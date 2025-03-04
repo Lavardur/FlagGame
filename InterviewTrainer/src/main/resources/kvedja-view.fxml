@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="hi.verkefni.vidmot.KvedjaController" alignment="CENTER" spacing="30" stylesheets="@interview.css">
+    <Label text="Viðtalsþjálfinn" styleClass="title-text"/>
+    <Label text="Takk fyrir að nota Viðtalsþjálfann!" />
+    <Label text="Góðs gengis í atvinnuviðtalinu!" />
+    <Button text="Loka" fx:id="closeButton" onAction="#handleClose"/>
+</VBox>
