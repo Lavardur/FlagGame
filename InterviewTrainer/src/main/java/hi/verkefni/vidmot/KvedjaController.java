@@ -9,6 +9,9 @@ public class KvedjaController {
     @FXML
     private Button closeButton;
 
+    /**
+     * Lokar forritinu.
+     */
     @FXML
     private void handleClose() {
         Stage stage = (Stage) closeButton.getScene().getWindow();

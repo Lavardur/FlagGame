@@ -13,6 +13,9 @@ public class Spurningar {
         initializeSpurningaflokkar();
     }
 
+    /**
+     * Upphafsstillir spurningaflokka.
+     */
     private void initializeSpurningaflokkar() {
         List<String> taeknispurningar = new ArrayList<>();
         taeknispurningar.add("Hvernig myndir þú leysa vandamál í forritun?");
@@ -28,10 +31,22 @@ public class Spurningar {
         spurningaflokkar.put("Færnispurningar", faernispurningar);
     }
 
+    /**
+     * Sækir spurningar fyrir tiltekinn flokk.
+     *
+     * @param flokkur Flokkurinn sem á að sækja spurningar fyrir.
+     * @return Listi af spurningum fyrir tiltekinn flokk.
+     */
     public List<String> getSpurningar(String flokkur) {
         return spurningaflokkar.getOrDefault(flokkur, new ArrayList<>());
     }
 
+    /**
+     * Sækir spurningaflokka fyrir tiltekinn flokk.
+     *
+     * @param category Flokkurinn sem á að sækja spurningaflokka fyrir.
+     * @return Listi af spurningaflokkum fyrir tiltekinn flokk.
+     */
     public List<String> getSpurningaflokkar(String category) {
         return spurningaflokkar.getOrDefault(category, new ArrayList<>());
     }

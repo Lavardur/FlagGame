@@ -15,6 +15,11 @@ public class ViewSwitcher {
         this.stage = stage;
     }
 
+    /**
+     * Skiptir yfir í nýtt View.
+     *
+     * @param fxmlFile Slóð á FXML skrána fyrir nýja útsýnið.
+     */
     public void switchToView(String fxmlFile) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));

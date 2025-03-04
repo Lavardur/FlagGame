@@ -12,7 +12,9 @@ public class VelkominnController {
     @FXML
     private Button haettaButton;
 
-
+    /**
+     * Meðhöndlar aðgerð þegar spurningarhnappur er ýttur.
+     */
     @FXML
     private void handleSpurningarButtonAction() {
         System.out.println("Spurningar button pressed");
@@ -20,6 +22,9 @@ public class VelkominnController {
         viewSwitcher.switchToView("/spurningar-view.fxml");
     }
 
+    /**
+     * Meðhöndlar aðgerð þegar hætta hnappur er ýttur.
+     */
     @FXML
     private void handleHaettaButtonAction() {
         System.out.println("Haetta button pressed");

@@ -2,14 +2,19 @@ package hi.verkefni.vinnsla;
 
 public class FeedbackService {
 
+    /**
+     * Gefur endurgjöf byggt á svari notanda.
+     *
+     * @param userResponse Svar notanda.
+     * @return Endurgjöf byggt á svari notanda.
+     */
     public String provideFeedback(String userResponse) {
-        // Basic feedback logic based on user response
         if (userResponse == null || userResponse.trim().isEmpty()) {
-            return "Please provide an answer.";
+            return "Vinsamlegast gefðu svar.";
         } else if (userResponse.length() < 20) {
-            return "Your answer is too short. Try to elaborate more.";
+            return "Svarið þitt er of stutt. Reyndu að útskýra betur.";
         } else {
-            return "Good job! Consider adding more details to strengthen your answer.";
+            return "Gott svar! Prófaðu að bæta við fleiri smáatriðum til að styrkja svarið þitt.";
         }
     }
 }

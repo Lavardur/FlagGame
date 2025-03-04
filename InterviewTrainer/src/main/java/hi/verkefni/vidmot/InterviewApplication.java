@@ -8,6 +8,11 @@ import javafx.stage.Stage;
 
 public class InterviewApplication extends Application {
 
+    /**
+     * Ræsir forritið.
+     *
+     * @param primaryStage Aðalsvið forritsins.
+     */
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -21,6 +26,7 @@ public class InterviewApplication extends Application {
         }
     }
 
+ 
     public static void main(String[] args) {
         launch(args);
     }

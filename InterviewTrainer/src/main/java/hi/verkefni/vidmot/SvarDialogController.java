@@ -31,19 +31,35 @@ public class SvarDialogController {
         feedbackService = new FeedbackService();
     }
 
+    /**
+     * Upphafsstillir gluggann.
+     */
     @FXML
     private void initialize() {
         feedbackLabel.setText("");
     }
 
+    /**
+     * Setur spurninguna í gluggann.
+     *
+     * @param question Spurningin sem á að setja.
+     */
     public void setQuestion(String question) {
         questionLabel.setText(question);
     }
 
+    /**
+     * Athugar hvort spurningin hafi verið svöruð.
+     *
+     * @return true ef spurningin hefur verið svöruð, annars false.
+     */
     public boolean isAnswered() {
         return answered;
     }
 
+    /**
+     * Meðhöndlar innsendingu svars.
+     */
     @FXML
     private void handleSubmit() {
         String answer = answerTextArea.getText();
@@ -52,12 +68,11 @@ public class SvarDialogController {
         answered = true;
     }
 
+    /**
+     * Lokar glugganum.
+     */
     @FXML
     private void handleCancel() {
-        closeDialog();
-    }
-
-    private void closeDialog() {
         Stage stage = (Stage) submitButton.getScene().getWindow();
         stage.close();
     }
