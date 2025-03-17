@@ -1,17 +1,12 @@
 package hi.verkefni.vidmot;
 
-import hi.verkefni.vinnsla.EventModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuBar;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import java.io.File;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 /**
  * Controller for the menu bar in the EventManager application.

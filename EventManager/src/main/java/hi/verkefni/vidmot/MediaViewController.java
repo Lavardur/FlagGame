@@ -1,7 +1,6 @@
 package hi.verkefni.vidmot;
 
 import hi.verkefni.vinnsla.EventModel;
-import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -50,9 +49,10 @@ public class MediaViewController {
     
     private MediaPlayer mediaPlayer;
     private EventModel eventModel;
-    private EventManagerController mainController;
     private boolean updating = false;
     private ChangeListener<Duration> currentTimeListener;
+    @SuppressWarnings("unused")
+    private EventManagerController mainController;
     
     @FXML
     private void initialize() {

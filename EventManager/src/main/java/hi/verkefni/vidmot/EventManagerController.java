@@ -8,9 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -45,6 +42,8 @@ public class EventManagerController {
     // Map to keep track of which EventView is associated with which EventModel
     private Map<EventModel, EventView> viewMap = new HashMap<>();
     
+    
+
     /**
      * Initialize the controller.
      * Sets the first EventView as the current event.

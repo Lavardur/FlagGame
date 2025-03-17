@@ -20,10 +20,7 @@ public class EventManagerApplication extends Application {
         // Update the eventmanager-view.fxml to use fx:id for included FXML
         FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("/eventmanager-view.fxml"));
         Parent root = mainLoader.load();
-        
-        // Get the main controller
-        EventManagerController mainController = mainLoader.getController();
-        
+
         // Set up the scene
         Scene scene = new Scene(root, 800, 750);
         
