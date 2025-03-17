@@ -3,20 +3,14 @@ package hi.verkefni.vidmot;
 import hi.verkefni.vinnsla.EventModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
-import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -40,15 +34,7 @@ public class EventView extends AnchorPane {
     @FXML
     private Spinner<LocalTime> fxTime;
     
-    @FXML
-    private MediaView fxMediaView;
-    
-    @FXML
-    private Button fxSelectVideoButton;
-    
     private EventModel eventModel;
-    private MediaPlayer mediaPlayer;
-    private boolean isPlaying = false;
     
     /**
      * Default constructor that loads the FXML file and initializes the component.
@@ -121,9 +107,6 @@ public class EventView extends AnchorPane {
         
         fxTime.setValueFactory(timeValueFactory);
         
-        // Set up button handlers
-        fxSelectVideoButton.setOnAction(e -> handleSelectVideo());
-        
         // Set up bindings
         setupBindings();
     }
@@ -149,65 +132,6 @@ public class EventView extends AnchorPane {
         eventModel.timeProperty().addListener((obs, oldVal, newVal) -> {
             fxTime.getValueFactory().setValue(newVal);
         });
-        
-        // Add listener to the media property
-        eventModel.promoVideoProperty().addListener((obs, oldMedia, newMedia) -> {
-            if (mediaPlayer != null) {
-                mediaPlayer.dispose();
-            }
-            
-            if (newMedia != null) {
-                mediaPlayer = new MediaPlayer(newMedia);
-                fxMediaView.setMediaPlayer(mediaPlayer);
-                
-                // Auto play the video
-                mediaPlayer.play();
-                isPlaying = true;
-            } else {
-                fxMediaView.setMediaPlayer(null);
-                isPlaying = false;
-            }
-        });
-    }
-    
-    /**
-     * Handler for selecting a video file.
-     * Opens a file chooser dialog and sets the selected file as the promotional video.
-     */
-    @FXML
-    private void handleSelectVideo() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Promotional Video");
-        fileChooser.getExtensionFilters().addAll(
-            new FileChooser.ExtensionFilter("Video Files", "*.mp4", "*.mov", "*.avi", "*.wmv")
-        );
-        
-        File selectedFile = fileChooser.showOpenDialog(getScene().getWindow());
-        if (selectedFile != null) {
-            try {
-                Media media = new Media(selectedFile.toURI().toString());
-                eventModel.promoVideoProperty().set(media);
-            } catch (Exception e) {
-                System.err.println("Error loading media file: " + e.getMessage());
-            }
-        }
-    }
-    
-    /**
-     * Handler for playing or pausing the video.
-     * Toggles between play and pause states.
-     */
-    @FXML
-    private void handlePlayPause() {
-        if (mediaPlayer != null) {
-            if (isPlaying) {
-                mediaPlayer.pause();
-                isPlaying = false;
-            } else {
-                mediaPlayer.play();
-                isPlaying = true;
-            }
-        }
     }
     
     /**
@@ -225,13 +149,6 @@ public class EventView extends AnchorPane {
      * @param model The new event model
      */
     public void setEventModel(EventModel model) {
-        // Stop any playing media
-        if (mediaPlayer != null) {
-            mediaPlayer.stop();
-            mediaPlayer.dispose();
-            mediaPlayer = null;
-        }
-        
         this.eventModel = model;
         
         // Update UI controls with model values
@@ -239,17 +156,6 @@ public class EventView extends AnchorPane {
         fxCategory.setValue(model.categoryProperty().get());
         fxDate.setValue(model.dateProperty().get());
         fxTime.getValueFactory().setValue(model.timeProperty().get());
-        
-        // Setup the media view if there's a promo video
-        if (model.promoVideoProperty().get() != null) {
-            mediaPlayer = new MediaPlayer(model.promoVideoProperty().get());
-            fxMediaView.setMediaPlayer(mediaPlayer);
-            mediaPlayer.play();
-            isPlaying = true;
-        } else {
-            fxMediaView.setMediaPlayer(null);
-            isPlaying = false;
-        }
         
         // Refresh bindings
         setupBindings();

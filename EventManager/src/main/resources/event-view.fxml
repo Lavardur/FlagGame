@@ -9,11 +9,8 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
 
 <fx:root type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -47,14 +44,6 @@
                   <Spinner fx:id="fxTime" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
-            
-            <Label styleClass="event-label" text="Promotional Video:" />
-            <MediaView fx:id="fxMediaView" fitHeight="240.0" fitWidth="400.0" />
-            
-            <HBox spacing="10" alignment="CENTER">
-                <Button fx:id="fxSelectVideoButton" text="Select Video" onAction="#handleSelectVideo" />
-                <Button fx:id="fxPlayPauseButton" text="Play/Pause" onAction="#handlePlayPause" />
-            </HBox>
          </children>
       </VBox>
    </children>

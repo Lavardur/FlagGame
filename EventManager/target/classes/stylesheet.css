@@ -1,0 +1,74 @@
+/* General application styles */
+.root {
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-background-color: #f4f4f4;
+}
+
+/* Event form styles */
+.event-label {
+    -fx-font-weight: bold;
+}
+
+/* Media view styles */
+.media-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+#mediaContainer {
+    -fx-background-color: #f5f5f5;
+}
+
+/* Button styling */
+.button {
+    -fx-background-color: #4285f4;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 7 12;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #3275e4;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 3, 0, 0, 1);
+}
+
+.button:pressed {
+    -fx-background-color: #2265d4;
+}
+
+.button:disabled {
+    -fx-background-color: #b0b0b0;
+    -fx-opacity: 0.7;
+}
+
+/* Slider styling */
+.slider .track {
+    -fx-background-color: #cccccc;
+    -fx-pref-height: 6;
+}
+
+.slider .thumb {
+    -fx-background-color: #4285f4;
+    -fx-pref-height: 15;
+    -fx-pref-width: 15;
+}
+
+.slider .thumb:hover {
+    -fx-background-color: #3275e4;
+}
+
+/* Time label styling */
+#timeLabel {
+    -fx-font-family: monospace;
+    -fx-font-size: 12px;
+    -fx-text-fill: #555555;
+}
+
+/* Ensure the mediaView area has an appropriate background */
+.media-view-container {
+    -fx-background-color: #2a2a2a;
+    -fx-background-radius: 4;
+}

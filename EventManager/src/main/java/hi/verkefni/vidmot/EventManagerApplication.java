@@ -11,6 +11,10 @@ import javafx.stage.Stage;
  */
 public class EventManagerApplication extends Application {
     
+    // Minimum dimensions to ensure all content is visible
+    private static final double MIN_WIDTH = 800;
+    private static final double MIN_HEIGHT = 750;
+    
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Update the eventmanager-view.fxml to use fx:id for included FXML
@@ -21,7 +25,12 @@ public class EventManagerApplication extends Application {
         EventManagerController mainController = mainLoader.getController();
         
         // Set up the scene
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 800, 750);
+        
+        // Set minimum window size constraints
+        primaryStage.setMinWidth(MIN_WIDTH);
+        primaryStage.setMinHeight(MIN_HEIGHT);
+        
         primaryStage.setTitle("Event Manager");
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -67,10 +67,8 @@ public class MenuController {
      */
     @FXML
     private void handleNew() {
-        if (mainController != null && mainController.getEventView() != null) {
-            // Create a new empty event model
-            EventModel newModel = new EventModel("", "Concert", LocalDate.now(), LocalTime.of(12, 0), null);
-            mainController.getEventView().setEventModel(newModel);
+        if (mainController != null) {
+            mainController.nyr();
         }
     }
     
@@ -79,23 +77,8 @@ public class MenuController {
      */
     @FXML
     private void handleOpen() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Event File");
-        fileChooser.getExtensionFilters().addAll(
-            new FileChooser.ExtensionFilter("Event Files", "*.evt"),
-            new FileChooser.ExtensionFilter("All Files", "*.*")
-        );
-        
-        File selectedFile = fileChooser.showOpenDialog(getWindow());
-        
-        if (selectedFile != null) {
-            // Here you would load the event from the file
-            // This is just a placeholder for now
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("File Selected");
-            alert.setHeaderText(null);
-            alert.setContentText("Selected file: " + selectedFile.getName());
-            alert.showAndWait();
+        if (mainController != null) {
+            mainController.opna();
         }
     }
     
@@ -104,23 +87,8 @@ public class MenuController {
      */
     @FXML
     private void handleSave() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save Event File");
-        fileChooser.getExtensionFilters().addAll(
-            new FileChooser.ExtensionFilter("Event Files", "*.evt"),
-            new FileChooser.ExtensionFilter("All Files", "*.*")
-        );
-        
-        File selectedFile = fileChooser.showSaveDialog(getWindow());
-        
-        if (selectedFile != null) {
-            // Here you would save the event to the file
-            // This is just a placeholder for now
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("File Saved");
-            alert.setHeaderText(null);
-            alert.setContentText("Event saved to file: " + selectedFile.getName());
-            alert.showAndWait();
+        if (mainController != null) {
+            mainController.vista();
         }
     }
     
@@ -129,11 +97,11 @@ public class MenuController {
      */
     @FXML
     private void handleEdit() {
-        // This is just a placeholder for now
+        // This is just a placeholder, could be implemented if needed
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Edit Event");
         alert.setHeaderText(null);
-        alert.setContentText("Edit event functionality");
+        alert.setContentText("Edit event functionality is handled directly in the form.");
         alert.showAndWait();
     }
     
@@ -142,12 +110,9 @@ public class MenuController {
      */
     @FXML
     private void handleDelete() {
-        // This is just a placeholder for now
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Delete Event");
-        alert.setHeaderText(null);
-        alert.setContentText("Delete event functionality");
-        alert.showAndWait();
+        if (mainController != null) {
+            mainController.eyda();
+        }
     }
     
     /**
@@ -168,7 +133,12 @@ public class MenuController {
      */
     @FXML
     private void handleClose() {
-        Stage stage = (Stage) getWindow();
-        stage.close();
+        if (mainController != null) {
+            mainController.loka();
+        } else {
+            // If we can't access the main controller, just close the window
+            Stage stage = (Stage) getWindow();
+            stage.close();
+        }
     }
 }
