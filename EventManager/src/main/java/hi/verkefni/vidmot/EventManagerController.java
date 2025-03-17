@@ -1,14 +1,35 @@
 package hi.verkefni.vidmot;
 
-import javafx.scene.Parent;
+import javafx.fxml.FXML;
+import javafx.scene.layout.BorderPane;
 
-public abstract class EventManagerController {
-
-    protected Parent root;
-
-    public abstract Parent getRoot();
-
-    public void setRoot(Parent root) {
-        this.root = root;
+/**
+ * Main controller for the EventManager application.
+ */
+public class EventManagerController {
+    
+    @FXML
+    private EventView eventView;
+    
+    @FXML
+    private BorderPane rootPane;
+    
+    @FXML
+    private MenuController menuViewController;
+    
+    @FXML
+    private void initialize() {
+        // Connect the controllers
+        if (menuViewController != null) {
+            menuViewController.setMainController(this);
+        }
+    }
+    
+    /**
+     * Gets the EventView component.
+     * @return The EventView component
+     */
+    public EventView getEventView() {
+        return eventView;
     }
 }

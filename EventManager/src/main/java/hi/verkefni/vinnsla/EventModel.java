@@ -14,14 +14,14 @@ import javafx.scene.media.Media;
  */
 public class EventModel {
     private final SimpleStringProperty eventName;
-    private final SimpleObjectProperty<String> category;
+    private final SimpleStringProperty category;
     private final SimpleObjectProperty<LocalDate> date;
     private final SimpleObjectProperty<LocalTime> time;
     private final SimpleObjectProperty<Media> promoVideo;
 
     public EventModel(String eventName, String category, LocalDate date, LocalTime time, Media promoVideo) {
         this.eventName = new SimpleStringProperty(eventName);
-        this.category = new SimpleObjectProperty<>(category);
+        this.category = new SimpleStringProperty(category);
         this.date = new SimpleObjectProperty<>(date);
         this.time = new SimpleObjectProperty<>(time);
         this.promoVideo = new SimpleObjectProperty<>(promoVideo);
@@ -31,7 +31,7 @@ public class EventModel {
         return eventName;
     }
 
-    public SimpleObjectProperty<String> categoryProperty() {
+    public SimpleStringProperty categoryProperty() {
         return category;
     }
 

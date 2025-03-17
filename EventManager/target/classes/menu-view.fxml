@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+
+<MenuBar fx:id="menuBar" prefHeight="25.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hi.verkefni.vidmot.MenuController">
+  <menus>
+    <Menu mnemonicParsing="false" text="Skrá">
+      <items>
+        <MenuItem fx:id="newMenuItem" mnemonicParsing="false" onAction="#handleNew" text="Nýr" />
+        <MenuItem fx:id="openMenuItem" mnemonicParsing="false" onAction="#handleOpen" text="Opna" />
+        <MenuItem fx:id="saveMenuItem" mnemonicParsing="false" onAction="#handleSave" text="Vista" />
+        <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#handleClose" text="Hætta" />
+      </items>
+    </Menu>
+    <Menu mnemonicParsing="false" text="Breyta">
+      <items>
+        <MenuItem fx:id="editMenuItem" mnemonicParsing="false" onAction="#handleEdit" text="Breyta viðburði" />
+        <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#handleDelete" text="Eyða viðburði" />
+      </items>
+    </Menu>
+    <Menu mnemonicParsing="false" text="Hjálp">
+      <items>
+        <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#handleAbout" text="Um" />
+      </items>
+    </Menu>
+  </menus>
+</MenuBar>
