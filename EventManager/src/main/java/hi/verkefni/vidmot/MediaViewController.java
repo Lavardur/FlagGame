@@ -18,6 +18,9 @@ import javafx.util.Duration;
 import java.io.File;
 import java.text.DecimalFormat;
 
+/**
+ * Stýriklasi fyrir MediaView í EventManager forritinu.
+ */
 public class MediaViewController {
     
     @FXML
@@ -54,55 +57,58 @@ public class MediaViewController {
     @SuppressWarnings("unused")
     private EventManagerController mainController;
     
+    /**
+     * Upphafsstillir stýriklasann.
+     */
     @FXML
     private void initialize() {
-        // Initialize controls
+        // Upphafsstilla stjórntæki
         pauseButton.setDisable(true);
         stopButton.setDisable(true);
         timeSlider.setDisable(true);
         
-        // Setup time slider listener
+        // Setja upp hlustara fyrir tíma sleðann
         timeSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
             if (!updating && mediaPlayer != null) {
                 try {
-                    // Convert the slider value to duration
+                    // Umbreyta sleðagildi í tíma
                     double duration = mediaPlayer.getMedia().getDuration().toSeconds();
                     double seekTime = timeSlider.getValue() * duration / 100.0;
                     mediaPlayer.seek(Duration.seconds(seekTime));
                 } catch (Exception e) {
-                    System.err.println("Error seeking: " + e.getMessage());
+                    System.err.println("Villa við að leita: " + e.getMessage());
                 }
             }
         });
         
-        // Setup MediaView to bind to its parent size for scaling
+        // Setja upp MediaView til að binda við stærð foreldris fyrir stærðarbreytingu
         StackPane mediaViewParent = (StackPane) mediaView.getParent();
         if (mediaViewParent != null) {
-            // Set MediaView to scale with its parent
+            // Setja MediaView til að stækka með foreldri
             mediaView.fitWidthProperty().bind(mediaViewParent.widthProperty().multiply(0.95));
             mediaView.fitHeightProperty().bind(mediaViewParent.heightProperty().multiply(0.95));
         }
     }
     
     /**
-     * Set the event model to display its media
+     * Setur viðburðalíkan til að birta myndmiðla þess.
      * 
-     * @param model The event model
+     * @param model Viðburðalíkanið
      */
     public void setEventModel(EventModel model) {
         this.eventModel = model;
         
-        // Add a listener to the media property
+        // Bæta hlustara við myndmiðlaeiginleika
         if (model != null) {
             model.promoVideoProperty().addListener((obs, oldMedia, newMedia) -> {
                 setupMediaPlayer(newMedia);
             });
             
-            // Initial setup if media exists
+            // Upphafsstilla ef myndmiðill er til staðar
             if (model.promoVideoProperty().get() != null) {
                 setupMediaPlayer(model.promoVideoProperty().get());
             } else {
-                // Reset the media view if no media
+                // Endurstilla MediaView ef enginn myndmiðill er til staðar
                 resetMediaView();
             }
         } else {
@@ -111,7 +117,7 @@ public class MediaViewController {
     }
     
     /**
-     * Reset the media view when no media is available
+     * Endurstilla MediaView þegar enginn myndmiðill er til staðar.
      */
     private void resetMediaView() {
         if (mediaPlayer != null) {
@@ -127,20 +133,20 @@ public class MediaViewController {
         playButton.setDisable(true);
         pauseButton.setDisable(true);
         stopButton.setDisable(true);
-        mediaTitle.setText("Promotional Video");
+        mediaTitle.setText("Kynningarmyndband");
     }
     
     /**
-     * Set the main controller reference
+     * Setur tilvísun í aðalstýriklasann.
      * 
-     * @param controller The main controller
+     * @param controller Aðalstýriklasinn
      */
     public void setMainController(EventManagerController controller) {
         this.mainController = controller;
     }
     
     /**
-     * Play the media
+     * Spilar myndmiðilinn.
      */
     @FXML
     private void handlePlay() {
@@ -150,25 +156,25 @@ public class MediaViewController {
                 playButton.setDisable(true);
                 pauseButton.setDisable(false);
                 stopButton.setDisable(false);
-                System.out.println("Playing media: " + mediaPlayer.getMedia().getSource());
+                System.out.println("Spila myndmiðil: " + mediaPlayer.getMedia().getSource());
                 
-                // Debug info to check video properties
+                // Debug upplýsingar til að athuga myndmiðlaeiginleika
                 mediaPlayer.setOnReady(() -> {
-                    System.out.println("Media is ready");
-                    System.out.println("Media width: " + mediaPlayer.getMedia().getWidth());
-                    System.out.println("Media height: " + mediaPlayer.getMedia().getHeight());
-                    System.out.println("Media duration: " + mediaPlayer.getMedia().getDuration());
-                    System.out.println("MediaView fit width: " + mediaView.getFitWidth());
-                    System.out.println("MediaView fit height: " + mediaView.getFitHeight());
+                    System.out.println("Myndmiðill er tilbúinn");
+                    System.out.println("Myndmiðilsbreidd: " + mediaPlayer.getMedia().getWidth());
+                    System.out.println("Myndmiðilshæð: " + mediaPlayer.getMedia().getHeight());
+                    System.out.println("Lengd myndmiðils: " + mediaPlayer.getMedia().getDuration());
+                    System.out.println("MediaView fit breidd: " + mediaView.getFitWidth());
+                    System.out.println("MediaView fit hæð: " + mediaView.getFitHeight());
                 });
             } catch (Exception e) {
-                System.err.println("Error playing media: " + e.getMessage());
+                System.err.println("Villa við að spila myndmiðil: " + e.getMessage());
             }
         }
     }
     
     /**
-     * Pause the media
+     * Pásar myndmiðilinn.
      */
     @FXML
     private void handlePause() {
@@ -180,7 +186,7 @@ public class MediaViewController {
     }
     
     /**
-     * Stop the media
+     * Stöðvar myndmiðilinn.
      */
     @FXML
     private void handleStop() {
@@ -193,42 +199,42 @@ public class MediaViewController {
     }
     
     /**
-     * Open file chooser to select a video
+     * Opnar skráarval til að velja myndband.
      */
     @FXML
     private void handleSelectVideo() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Promotional Video");
+        fileChooser.setTitle("Velja kynningarmyndband");
         fileChooser.getExtensionFilters().addAll(
-            new FileChooser.ExtensionFilter("Video Files", "*.mp4", "*.mov", "*.avi", "*.wmv")
+            new FileChooser.ExtensionFilter("Myndbandsskrár", "*.mp4", "*.mov", "*.avi", "*.wmv")
         );
         
         File selectedFile = fileChooser.showOpenDialog(mediaContainer.getScene().getWindow());
         if (selectedFile != null && eventModel != null) {
             try {
-                System.out.println("Loading video file: " + selectedFile.getAbsolutePath());
+                System.out.println("Hleður myndbandsskrá: " + selectedFile.getAbsolutePath());
                 Media media = new Media(selectedFile.toURI().toString());
                 eventModel.promoVideoProperty().set(media);
             } catch (MediaException me) {
-                System.err.println("Media error: " + me.getMessage());
-                System.err.println("Error type: " + me.getType());
+                System.err.println("Myndmiðlavilla: " + me.getMessage());
+                System.err.println("Villutegund: " + me.getType());
                 if (me.getCause() != null) {
-                    System.err.println("Cause: " + me.getCause().getMessage());
+                    System.err.println("Orsök: " + me.getCause().getMessage());
                 }
             } catch (Exception e) {
-                System.err.println("Error loading media file: " + e.getMessage());
+                System.err.println("Villa við að hlaða myndmiðilsskrá: " + e.getMessage());
                 e.printStackTrace();
             }
         }
     }
     
     /**
-     * Setup the media player with the given media
+     * Setur upp MediaPlayer með gefnum myndmiðli.
      * 
-     * @param media The media to play
+     * @param media Myndmiðillinn til að spila
      */
     private void setupMediaPlayer(Media media) {
-        // Clean up old media player if it exists
+        // Hreinsa gamla MediaPlayer ef hann er til staðar
         if (mediaPlayer != null) {
             if (currentTimeListener != null) {
                 mediaPlayer.currentTimeProperty().removeListener(currentTimeListener);
@@ -238,22 +244,22 @@ public class MediaViewController {
         
         if (media != null) {
             try {
-                // Create a new media player
+                // Búa til nýjan MediaPlayer
                 mediaPlayer = new MediaPlayer(media);
                 mediaView.setMediaPlayer(mediaPlayer);
                 
-                // Set additional properties for the MediaView
+                // Setja viðbótareiginleika fyrir MediaView
                 mediaView.setPreserveRatio(true);
                 mediaView.setSmooth(true);
                 
-                // Ensure MediaView is properly scaling with its container
+                // Tryggja að MediaView stækki með foreldri sínu
                 StackPane mediaViewParent = (StackPane) mediaView.getParent();
                 if (mediaViewParent != null) {
                     mediaView.fitWidthProperty().bind(mediaViewParent.widthProperty().multiply(0.95));
                     mediaView.fitHeightProperty().bind(mediaViewParent.heightProperty().multiply(0.95));
                 }
                 
-                // Update the title if we have a source
+                // Uppfæra titil ef við höfum heimild
                 String source = media.getSource();
                 if (source != null) {
                     String fileName;
@@ -265,23 +271,23 @@ public class MediaViewController {
                         fileName = source;
                     }
                     mediaTitle.setText(fileName);
-                    System.out.println("Media source: " + source);
+                    System.out.println("Myndmiðilsheimild: " + source);
                 }
                 
-                // Enable controls
+                // Virkja stjórntæki
                 timeSlider.setDisable(false);
                 
-                // Setup time tracking
+                // Setja upp tímamælingu
                 currentTimeListener = (obs, oldTime, newTime) -> {
                     if (!timeSlider.isValueChanging()) {
                         updating = true;
                         Duration duration = mediaPlayer.getMedia().getDuration();
                         if (duration.greaterThan(Duration.ZERO)) {
-                            // Convert duration to percentage for the slider
+                            // Umbreyta lengd í prósentu fyrir sleðann
                             double percentage = newTime.toMillis() / duration.toMillis() * 100.0;
                             timeSlider.setValue(percentage);
                             
-                            // Update time label
+                            // Uppfæra tímamerki
                             updateTimeLabel(newTime, duration);
                         }
                         updating = false;
@@ -290,16 +296,16 @@ public class MediaViewController {
                 
                 mediaPlayer.currentTimeProperty().addListener(currentTimeListener);
                 
-                // Add error handler
+                // Bæta við villumeðhöndlun
                 mediaPlayer.setOnError(() -> {
                     MediaException error = mediaPlayer.getError();
-                    System.err.println("Media player error: " + error.getMessage());
+                    System.err.println("MediaPlayer villa: " + error.getMessage());
                     if (error.getCause() != null) {
-                        System.err.println("Cause: " + error.getCause().getMessage());
+                        System.err.println("Orsök: " + error.getCause().getMessage());
                     }
                 });
                 
-                // Setup end of media handler
+                // Setja upp meðhöndlun fyrir lok myndmiðils
                 mediaPlayer.setOnEndOfMedia(() -> {
                     mediaPlayer.stop();
                     mediaPlayer.seek(Duration.ZERO);
@@ -308,35 +314,35 @@ public class MediaViewController {
                     stopButton.setDisable(true);
                 });
                 
-                // Auto play
+                // Sjálfvirk spilun
                 mediaPlayer.play();
                 playButton.setDisable(true);
                 pauseButton.setDisable(false);
                 stopButton.setDisable(false);
                 
-                // Print debug information when the media is ready
+                // Prenta debug upplýsingar þegar myndmiðill er tilbúinn
                 mediaPlayer.setOnReady(() -> {
-                    System.out.println("Media ready:");
-                    System.out.println("  Width: " + media.getWidth());
-                    System.out.println("  Height: " + media.getHeight());
-                    System.out.println("  Duration: " + media.getDuration());
+                    System.out.println("Myndmiðill tilbúinn:");
+                    System.out.println("  Breidd: " + media.getWidth());
+                    System.out.println("  Hæð: " + media.getHeight());
+                    System.out.println("  Lengd: " + media.getDuration());
                 });
             } catch (Exception e) {
-                System.err.println("Error setting up media player: " + e.getMessage());
+                System.err.println("Villa við að setja upp MediaPlayer: " + e.getMessage());
                 e.printStackTrace();
                 resetMediaView();
             }
         } else {
-            // No media, reset everything
+            // Enginn myndmiðill, endurstilla allt
             resetMediaView();
         }
     }
     
     /**
-     * Update the time label with current time and duration
+     * Uppfærir tímamerki með núverandi tíma og lengd.
      * 
-     * @param currentTime Current playback time
-     * @param duration Total duration
+     * @param currentTime Núverandi spilunartími
+     * @param duration Heildarlengd
      */
     private void updateTimeLabel(Duration currentTime, Duration duration) {
         DecimalFormat format = new DecimalFormat("00");

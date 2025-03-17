@@ -17,8 +17,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * EventView is a custom component defined in the event-view.fxml file.
- * It manages the UI elements for displaying and editing an EventModel.
+ * EventView er sérsniðinn hluti skilgreindur í event-view.fxml skránni.
+ * Hann sér um viðmótshluta fyrir að sýna og breyta EventModel.
  */
 public class EventView extends AnchorPane {
     
@@ -37,7 +37,7 @@ public class EventView extends AnchorPane {
     private EventModel eventModel;
     
     /**
-     * Default constructor that loads the FXML file and initializes the component.
+     * Sjálfgefinn smiður sem hleður FXML skránni og frumstillir hlutinn.
      */
     public EventView() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/event-view.fxml"));
@@ -50,22 +50,22 @@ public class EventView extends AnchorPane {
             throw new RuntimeException(exception);
         }
         
-        // Create a default event model
+        // Býr til sjálfgefið viðburðarlíkan
         eventModel = new EventModel("", "Concert", LocalDate.now(), LocalTime.of(12, 0), null);
         
-        // Initialize the component
+        // Frumstillir hlutinn
         initialize();
     }
     
     /**
-     * Initialize the component by setting up UI controls and bindings.
+     * Frumstillir hlutinn með því að setja upp viðmótshluta og bindingar.
      */
     private void initialize() {
-        // Set up category combo box
+        // Setur upp flokkavalmynd
         fxCategory.getItems().addAll("Concert", "Theater", "Sports", "Conference", "Exhibition", "Other");
         fxCategory.setValue("Concert");
         
-        // Set up time spinner
+        // Setur upp tíma spinner
         SpinnerValueFactory<LocalTime> timeValueFactory = new SpinnerValueFactory<LocalTime>() {
             {
                 setValue(LocalTime.of(12, 0));
@@ -84,7 +84,7 @@ public class EventView extends AnchorPane {
             }
         };
         
-        // Set a converter for the spinner
+        // Setur upp umbreytingu fyrir spinner
         timeValueFactory.setConverter(new StringConverter<LocalTime>() {
             private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
             
@@ -107,24 +107,24 @@ public class EventView extends AnchorPane {
         
         fxTime.setValueFactory(timeValueFactory);
         
-        // Set up bindings
+        // Setur upp bindingar
         setupBindings();
     }
     
     /**
-     * Set up bidirectional bindings between UI controls and EventModel properties.
+     * Setur upp tvíátta bindingar milli viðmótshluta og eiginleika EventModel.
      */
     private void setupBindings() {
-        // Bind text field to event name property
+        // Bindur textareit við nafn eiginleika viðburðar
         fxEventName.textProperty().bindBidirectional(eventModel.eventNameProperty());
         
-        // Bind combo box to category property
+        // Bindur valmynd við flokkseiginleika
         fxCategory.valueProperty().bindBidirectional(eventModel.categoryProperty());
         
-        // Bind date picker to date property
+        // Bindur dagatalsval við dagseiginleika
         fxDate.valueProperty().bindBidirectional(eventModel.dateProperty());
         
-        // For time spinner, we need to use listeners since Spinner doesn't support direct binding
+        // Fyrir tíma spinner, notum við hlustara þar sem Spinner styður ekki beinar bindingar
         fxTime.valueProperty().addListener((obs, oldVal, newVal) -> {
             eventModel.timeProperty().set(newVal);
         });
@@ -135,29 +135,29 @@ public class EventView extends AnchorPane {
     }
     
     /**
-     * Get the event model associated with this view.
+     * Nær í viðburðarlíkanið sem tengist þessari sýn.
      * 
-     * @return The event model
+     * @return Viðburðarlíkanið
      */
     public EventModel getEventModel() {
         return eventModel;
     }
     
     /**
-     * Set a new event model for this view.
+     * Setur nýtt viðburðarlíkan fyrir þessa sýn.
      * 
-     * @param model The new event model
+     * @param model Nýja viðburðarlíkanið
      */
     public void setEventModel(EventModel model) {
         this.eventModel = model;
         
-        // Update UI controls with model values
+        // Uppfærir viðmótshluta með gildum úr líkaninu
         fxEventName.setText(model.eventNameProperty().get());
         fxCategory.setValue(model.categoryProperty().get());
         fxDate.setValue(model.dateProperty().get());
         fxTime.getValueFactory().setValue(model.timeProperty().get());
         
-        // Refresh bindings
+        // Endurnýjar bindingar
         setupBindings();
     }
 }

@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 /**
- * Controller for the menu bar in the EventManager application.
+ * Stýriklasi fyrir valmyndastiku í EventManager forritinu.
  */
 public class MenuController {
     @FXML
@@ -37,28 +37,28 @@ public class MenuController {
     private MenuItem aboutMenuItem;
     
     /**
-     * Reference to the main controller to access the EventView
+     * Tilvísun í aðalstýriklasann til að fá aðgang að EventView.
      */
     private EventManagerController mainController;
     
     /**
-     * Set the main controller reference
-     * @param controller The main EventManagerController
+     * Setur tilvísun í aðalstýriklasann.
+     * @param controller Aðalstýriklasinn EventManagerController
      */
     public void setMainController(EventManagerController controller) {
         this.mainController = controller;
     }
     
     /**
-     * Get the window from the menu bar
-     * @return The window containing the menu bar
+     * Nær í gluggann sem inniheldur valmyndastikuna.
+     * @return Glugginn sem inniheldur valmyndastikuna
      */
     private Window getWindow() {
         return menuBar.getScene().getWindow();
     }
 
     /**
-     * Handler for creating a new event.
+     * Handler fyrir að búa til nýjan viðburð.
      */
     @FXML
     private void handleNew() {
@@ -68,7 +68,7 @@ public class MenuController {
     }
     
     /**
-     * Handler for opening an event file.
+     * Handler fyrir að opna viðburðarskrá.
      */
     @FXML
     private void handleOpen() {
@@ -78,7 +78,7 @@ public class MenuController {
     }
     
     /**
-     * Handler for saving an event file.
+     * Handler fyrir að vista viðburðarskrá.
      */
     @FXML
     private void handleSave() {
@@ -88,20 +88,20 @@ public class MenuController {
     }
     
     /**
-     * Handler for editing an event.
+     * Handler fyrir að breyta viðburði.
      */
     @FXML
     private void handleEdit() {
-        // This is just a placeholder, could be implemented if needed
+        // Þetta er bara staðgengill, gæti verið útfært ef þörf er á
         Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Edit Event");
+        alert.setTitle("Breyta viðburði");
         alert.setHeaderText(null);
-        alert.setContentText("Edit event functionality is handled directly in the form.");
+        alert.setContentText("Breytingar á viðburði eru framkvæmdar beint í formi.");
         alert.showAndWait();
     }
     
     /**
-     * Handler for deleting an event.
+     * Handler fyrir að eyða viðburði.
      */
     @FXML
     private void handleDelete() {
@@ -111,27 +111,27 @@ public class MenuController {
     }
     
     /**
-     * Handler for showing the about dialog.
+     * Handler fyrir að sýna upplýsingar um forritið.
      */
     @FXML
     private void handleAbout() {
         Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("About Event Manager");
-        alert.setHeaderText("Event Manager Application");
-        alert.setContentText("This application was created as a project for the HÍ Viðmótsforritun course. " +
-                            "It allows you to create and manage events with promotional videos.");
+        alert.setTitle("Um Viðburðarstjóra");
+        alert.setHeaderText("Viðburðarstjóri");
+        alert.setContentText("Þetta forrit leyfir notanda að skrá viðburði, heiti þeirra, tíma og dagsetningu, flokk og kynningarmyndband." +
+                            "Hægt er að stofna nýjan viðburð, opna viðburð, loka viðburði, breyta þeim, vista og eyða.");
         alert.showAndWait();
     }
     
     /**
-     * Handler for closing the application.
+     * Handler fyrir að loka forritinu.
      */
     @FXML
     private void handleClose() {
         if (mainController != null) {
             mainController.loka();
         } else {
-            // If we can't access the main controller, just close the window
+            // Ef við getum ekki fengið aðgang að aðalstýriklasanum, loka bara glugganum
             Stage stage = (Stage) getWindow();
             stage.close();
         }

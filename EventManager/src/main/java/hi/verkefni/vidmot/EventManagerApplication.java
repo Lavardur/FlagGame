@@ -7,32 +7,43 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * Main application class for the EventManager application.
+ * Aðalklasi fyrir EventManager forritið.
  */
 public class EventManagerApplication extends Application {
     
-    // Minimum dimensions to ensure all content is visible
+    // Lágmarksstærðir til að tryggja að allt efni sé sýnilegt
     private static final double MIN_WIDTH = 800;
     private static final double MIN_HEIGHT = 750;
     
+    /**
+     * Aðferð sem keyrir þegar forritið er ræst.
+     * 
+     * @param primaryStage Aðalsvið forritsins.
+     * @throws Exception Ef villa kemur upp við hleðslu FXML skrárinnar.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Update the eventmanager-view.fxml to use fx:id for included FXML
+        // Uppfærir eventmanager-view.fxml til að nota fx:id fyrir innifalið FXML
         FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("/eventmanager-view.fxml"));
         Parent root = mainLoader.load();
 
-        // Set up the scene
+        // Setur upp sviðið
         Scene scene = new Scene(root, 800, 750);
         
-        // Set minimum window size constraints
+        // Setur lágmarksstærðir gluggans
         primaryStage.setMinWidth(MIN_WIDTH);
         primaryStage.setMinHeight(MIN_HEIGHT);
         
-        primaryStage.setTitle("Event Manager");
+        primaryStage.setTitle("Viðburðarstjóri");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
     
+    /**
+     * Aðal aðferð sem ræst forritið.
+     * 
+     * @param args Rök sem eru send til forritsins.
+     */
     public static void main(String[] args) {
         launch(args);
     }
