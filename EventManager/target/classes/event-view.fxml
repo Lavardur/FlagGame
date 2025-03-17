@@ -31,16 +31,16 @@
                 <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label styleClass="event-label" text="Event Name:" />
+                  <Label styleClass="event-label" text="Heiti:" />
                   <TextField fx:id="fxEventName" GridPane.columnIndex="1" />
                   
-                  <Label styleClass="event-label" text="Category:" GridPane.rowIndex="1" />
+                  <Label styleClass="event-label" text="Flokkur:" GridPane.rowIndex="1" />
                   <ComboBox fx:id="fxCategory" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   
-                  <Label styleClass="event-label" text="Date:" GridPane.rowIndex="2" />
+                  <Label styleClass="event-label" text="Dagsetning:" GridPane.rowIndex="2" />
                   <DatePicker fx:id="fxDate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   
-                  <Label styleClass="event-label" text="Time:" GridPane.rowIndex="3" />
+                  <Label styleClass="event-label" text="Tími:" GridPane.rowIndex="3" />
                   <Spinner fx:id="fxTime" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
