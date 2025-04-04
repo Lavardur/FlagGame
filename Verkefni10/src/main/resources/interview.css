@@ -8,6 +8,11 @@ body {
     padding: 20px;
 }
 
+.root {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-background-color: #f0f5ff;
+}
+
 /* Styles for buttons */
 .button {
     background-color: #4CAF50; /* Green */
@@ -21,10 +26,17 @@ body {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+    -fx-background-radius: 4;
 }
 
 .button:hover {
     background-color: #45a049;
+    -fx-background-color: #2980b9;
 }
 
 /* Styles for lists */
@@ -62,6 +74,10 @@ h1, h2, h3 {
 .feedback {
     color: #d9534f; /* Red */
     font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 5 10;
+    -fx-background-radius: 4;
+    -fx-min-height: 20px;
 }
 
 /* Styles for title text */
@@ -70,4 +86,32 @@ h1, h2, h3 {
     font-weight: bold;
     color: #333;
     margin-bottom: 20px;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.radio-button {
+    -fx-font-size: 14px;
+    -fx-padding: 5;
+}
+
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 4;
+}
+
+#flagImageView {
+    -fx-border-color: #ddd;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 0);
+}
+
+#scoreLabel {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
 }

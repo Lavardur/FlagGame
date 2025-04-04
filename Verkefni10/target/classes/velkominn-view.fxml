@@ -8,12 +8,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="281.0" prefWidth="505.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hi.verkefni.vidmot.VelkominnController">
    <children>
-      <Text layoutX="154.0" layoutY="77.0" styleClass="welcome-text" text="Velkomin í Viðtalsþjálfann!" textAlignment="CENTER">
+      <Text layoutX="154.0" layoutY="77.0" styleClass="welcome-text" text="Welcome to Flag Guessing Game!" textAlignment="CENTER">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <Button layoutX="194.0" layoutY="128.0" onAction="#handleSpurningarButtonAction" text="Fara í Spurningar" fx:id="spurningarButton"/>
-      <Button layoutX="223.0" layoutY="174.0" text="Hætta" onAction="#handleHaettaButtonAction" fx:id="haettaButton"/>
+      <Button layoutX="194.0" layoutY="128.0" onAction="#handleSpurningarButtonAction" text="Start Game" fx:id="spurningarButton"/>
+      <Button layoutX="223.0" layoutY="174.0" text="Exit" onAction="#handleHaettaButtonAction" fx:id="haettaButton"/>
    </children>
 </AnchorPane>

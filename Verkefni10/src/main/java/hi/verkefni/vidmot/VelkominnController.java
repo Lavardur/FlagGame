@@ -13,21 +13,21 @@ public class VelkominnController {
     private Button haettaButton;
 
     /**
-     * Meðhöndlar aðgerð þegar spurningarhnappur er ýttur.
+     * Handles the action when the start game button is clicked.
      */
     @FXML
     private void handleSpurningarButtonAction() {
-        System.out.println("Spurningar button pressed");
+        System.out.println("Start game button pressed");
         ViewSwitcher viewSwitcher = new ViewSwitcher((Stage) spurningarButton.getScene().getWindow());
-        viewSwitcher.switchToView("/spurningar-view.fxml");
+        viewSwitcher.switchToView("/flag-game-view.fxml");
     }
 
     /**
-     * Meðhöndlar aðgerð þegar hætta hnappur er ýttur.
+     * Handles the action when the exit button is clicked.
      */
     @FXML
     private void handleHaettaButtonAction() {
-        System.out.println("Haetta button pressed");
+        System.out.println("Exit button pressed");
         ViewSwitcher viewSwitcher = new ViewSwitcher((Stage) haettaButton.getScene().getWindow());
         viewSwitcher.switchToView("/kvedja-view.fxml");
     }

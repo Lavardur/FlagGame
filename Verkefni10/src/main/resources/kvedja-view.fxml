@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" prefHeight="306.0" prefWidth="396.0" spacing="30" stylesheets="@interview.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="hi.verkefni.vidmot.KvedjaController">
-    <Label text="Takk fyrir að nota Viðtalsþjálfann!" />
-    <Label text="Gangi þér vel í viðtalinu!" />
-    <Button fx:id="closeButton" onAction="#handleClose" text="Hætta" />
+    <Label text="Thank you for playing the Flag Guessing Game!" />
+    <Label text="Hope to see you again soon!" />
+    <Button fx:id="closeButton" onAction="#handleClose" text="Exit" />
 </VBox>

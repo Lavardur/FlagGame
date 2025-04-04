@@ -9,15 +9,15 @@ import javafx.stage.Stage;
 public class InterviewApplication extends Application {
 
     /**
-     * Ræsir forritið.
+     * Starts the application.
      *
-     * @param primaryStage Aðalsvið forritsins.
+     * @param primaryStage The primary stage.
      */
     @Override
     public void start(Stage primaryStage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/velkominn-view.fxml"));
-            primaryStage.setTitle("Viðtalsþjálfinn");
+            primaryStage.setTitle("Flag Guessing Game");
             primaryStage.setScene(new Scene(root));
             primaryStage.setResizable(false);
             primaryStage.show();
@@ -26,7 +26,6 @@ public class InterviewApplication extends Application {
         }
     }
 
- 
     public static void main(String[] args) {
         launch(args);
     }
