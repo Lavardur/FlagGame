@@ -18,7 +18,7 @@ Fánaleikur þar sem þú færð fána og átt að velja hvaða land tilheyrir f
 Keyrðu eftirfarandi skipun til að klóna verkefnið af GitHub:
 
 ```bash
-git clone https://github.com/yourusername/Verkefni10.git
+git clone https://github.com/Lavardur/vidmotsforritun
 ```
 
 ### Skref 2: Fara í verkefnamöppuna
@@ -26,7 +26,7 @@ git clone https://github.com/yourusername/Verkefni10.git
 Farðu í möppuna sem þú klónaðir:
 
 ```bash
-cd Verkefni10
+cd vidmotsforritun/Verkefni10
 ```
 
 ### Skref 3: Byggja verkefnið
