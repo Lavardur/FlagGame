@@ -5,7 +5,6 @@ import hi.verkefni.vinnsla.Flag;
 import hi.verkefni.vinnsla.FlagService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -31,6 +30,12 @@ public class FlagGameController {
 
     @FXML
     private RadioButton option4;
+    
+    @FXML
+    private RadioButton option5;
+    
+    @FXML
+    private RadioButton option6;
 
     @FXML
     private ToggleGroup answerGroup;
@@ -42,7 +47,7 @@ public class FlagGameController {
     private Label scoreLabel;
     
     @FXML
-    private Label statsLabel;
+    private Label gameInfoLabel;
 
     @FXML
     private Button submitButton;
@@ -52,57 +57,44 @@ public class FlagGameController {
 
     @FXML
     private Button backButton;
-    
-    @FXML
-    private ComboBox<String> continentComboBox;
-    
-    @FXML
-    private ComboBox<String> difficultyComboBox;
 
     private FlagService flagService;
     private FeedbackService feedbackService;
     private Flag currentFlag;
     private int correctAnswers = 0;
     private int totalQuestions = 0;
+    private RadioButton[] optionButtons;
 
     @FXML
     public void initialize() {
+        System.out.println("Initializing FlagGameController");
+        
         flagService = new FlagService();
         feedbackService = new FeedbackService();
+        
+        // Create array of option buttons for easier handling
+        optionButtons = new RadioButton[]{option1, option2, option3, option4, option5, option6};
         
         // Initially disable the next button until submission
         nextButton.setDisable(true);
         
-        // Set up continent selection
-        continentComboBox.getItems().add("All Continents");
-        continentComboBox.getItems().addAll(flagService.getContinents());
-        continentComboBox.setValue("All Continents");
-        
-        // Set up difficulty levels
-        difficultyComboBox.getItems().addAll("Easy", "Medium", "Hard");
-        difficultyComboBox.setValue("Medium");
-        
-        // Add listener for selection changes
-        continentComboBox.setOnAction(event -> loadNewFlag());
-        difficultyComboBox.setOnAction(event -> loadNewFlag());
-        
-        // Update stats
-        updateStats();
+        // Set the game info label based on GameSettings
+        updateGameInfoLabel();
         
         // Load the first flag
         loadNewFlag();
     }
     
-    private void updateStats() {
-        String selectedContinent = continentComboBox.getValue();
-        int flagCount;
+    private void updateGameInfoLabel() {
+        // Get settings from the GameSettings singleton
+        String continent = GameSettings.getInstance().getContinent();
+        String difficulty = GameSettings.getInstance().getDifficulty();
         
-        if ("All Continents".equals(selectedContinent)) {
-            flagCount = flagService.getTotalFlagCount();
-            statsLabel.setText("Total flags: " + flagCount);
+        // Update the info label
+        if ("All Continents".equals(continent)) {
+            gameInfoLabel.setText("Continent: All | Difficulty: " + difficulty);
         } else {
-            flagCount = flagService.getFlagCountByContinent(selectedContinent);
-            statsLabel.setText(selectedContinent + " flags: " + flagCount);
+            gameInfoLabel.setText("Continent: " + continent + " | Difficulty: " + difficulty);
         }
     }
 
@@ -113,11 +105,8 @@ public class FlagGameController {
             answerGroup.getSelectedToggle().setSelected(false);
         }
         
-        // Update stats
-        updateStats();
-        
-        // Get a random flag based on selected continent
-        String selectedContinent = continentComboBox.getValue();
+        // Get a random flag based on selected continent from GameSettings
+        String selectedContinent = GameSettings.getInstance().getContinent();
         if ("All Continents".equals(selectedContinent)) {
             currentFlag = flagService.getRandomFlag();
         } else {
@@ -134,41 +123,20 @@ public class FlagGameController {
             flagImageView.setImage(null);
         }
         
-        // Determine number of options based on difficulty
-        int numOptions;
-        String difficulty = difficultyComboBox.getValue();
-        switch (difficulty) {
-            case "Easy":
-                numOptions = 3;
-                break;
-            case "Hard":
-                numOptions = 6;
-                break;
-            case "Medium":
-            default:
-                numOptions = 4;
-                break;
-        }
+        // Determine number of options based on difficulty from GameSettings
+        int numOptions = GameSettings.getInstance().getNumberOfOptions();
         
         // Get country options
         List<String> options = flagService.getCountryOptionsForFlag(currentFlag, numOptions);
         
         // Set the radio button text and visibility
-        option1.setText(options.get(0));
-        option2.setText(options.get(1));
-        
-        if (options.size() > 2) {
-            option3.setText(options.get(2));
-            option3.setVisible(true);
-        } else {
-            option3.setVisible(false);
-        }
-        
-        if (options.size() > 3) {
-            option4.setText(options.get(3));
-            option4.setVisible(true);
-        } else {
-            option4.setVisible(false);
+        for (int i = 0; i < optionButtons.length; i++) {
+            if (i < options.size()) {
+                optionButtons[i].setText(options.get(i));
+                optionButtons[i].setVisible(true);
+            } else {
+                optionButtons[i].setVisible(false);
+            }
         }
         
         // Enable submit button, disable next button
@@ -198,11 +166,20 @@ public class FlagGameController {
         // Update score if correct
         if (selectedCountry.equals(currentFlag.getCountryName())) {
             correctAnswers++;
+            feedbackLabel.getStyleClass().clear();
+            feedbackLabel.getStyleClass().add("feedback-correct");
+        } else {
+            feedbackLabel.getStyleClass().clear();
+            feedbackLabel.getStyleClass().add("feedback-incorrect");
         }
         
         // Update score label
-        scoreLabel.setText("Score: " + correctAnswers + "/" + totalQuestions + 
-                " (" + (int)((double)correctAnswers/totalQuestions*100) + "%)");
+        if (totalQuestions > 0) {
+            int percentage = (int)((double)correctAnswers/totalQuestions*100);
+            scoreLabel.setText("Score: " + correctAnswers + "/" + totalQuestions + " (" + percentage + "%)");
+        } else {
+            scoreLabel.setText("Score: 0/0 (0%)");
+        }
         
         // Disable submit button, enable next button
         submitButton.setDisable(true);
@@ -217,6 +194,6 @@ public class FlagGameController {
     @FXML
     private void handleBack() {
         ViewSwitcher viewSwitcher = new ViewSwitcher((Stage) backButton.getScene().getWindow());
-        viewSwitcher.switchToView("/velkominn-view.fxml");
+        viewSwitcher.switchToView("/game-setup-view.fxml");
     }
 }

@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class InterviewApplication extends Application {
+public class FlagGameApplication extends Application {
 
     /**
      * Starts the application.
