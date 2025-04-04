@@ -33,9 +33,6 @@ public class FlagGameController {
     
     @FXML
     private RadioButton option5;
-    
-    @FXML
-    private RadioButton option6;
 
     @FXML
     private ToggleGroup answerGroup;
@@ -61,8 +58,6 @@ public class FlagGameController {
     private FlagService flagService;
     private FeedbackService feedbackService;
     private Flag currentFlag;
-    private int correctAnswers = 0;
-    private int totalQuestions = 0;
     private RadioButton[] optionButtons;
 
     @FXML
@@ -73,13 +68,16 @@ public class FlagGameController {
         feedbackService = new FeedbackService();
         
         // Create array of option buttons for easier handling
-        optionButtons = new RadioButton[]{option1, option2, option3, option4, option5, option6};
+        optionButtons = new RadioButton[]{option1, option2, option3, option4, option5};
         
         // Initially disable the next button until submission
         nextButton.setDisable(true);
         
         // Set the game info label based on GameSettings
         updateGameInfoLabel();
+        
+        // Show the current score
+        updateScoreLabel();
         
         // Load the first flag
         loadNewFlag();
@@ -97,21 +95,42 @@ public class FlagGameController {
             gameInfoLabel.setText("Continent: " + continent + " | Difficulty: " + difficulty);
         }
     }
+    
+    private void updateScoreLabel() {
+        int correctAnswers = GameSettings.getInstance().getCorrectAnswers();
+        int totalQuestions = GameSettings.getInstance().getTotalQuestions();
+        int questionsPerRound = GameSettings.getInstance().getQuestionsPerRound();
+        
+        if (totalQuestions > 0) {
+            int percentage = (int)((double)correctAnswers/totalQuestions*100);
+            scoreLabel.setText("Score: " + correctAnswers + "/" + totalQuestions + 
+                    " (" + percentage + "%) - " + (questionsPerRound - totalQuestions) + " questions left");
+        } else {
+            scoreLabel.setText("Score: 0/0 (0%) - " + questionsPerRound + " questions left");
+        }
+    }
 
     private void loadNewFlag() {
         // Clear previous selections and feedback
         feedbackLabel.setText("");
+        feedbackLabel.getStyleClass().removeAll("feedback-correct", "feedback-incorrect");
         if (answerGroup.getSelectedToggle() != null) {
             answerGroup.getSelectedToggle().setSelected(false);
         }
         
+        // Get whether to use top flags (for Easy mode)
+        boolean useTopFlags = GameSettings.getInstance().useTopFlags();
+        
         // Get a random flag based on selected continent from GameSettings
         String selectedContinent = GameSettings.getInstance().getContinent();
         if ("All Continents".equals(selectedContinent)) {
-            currentFlag = flagService.getRandomFlag();
+            currentFlag = flagService.getRandomFlag(useTopFlags);
         } else {
-            currentFlag = flagService.getRandomFlag(selectedContinent);
+            currentFlag = flagService.getRandomFlag(selectedContinent, useTopFlags);
         }
+        
+        // Mark this flag as used to prevent duplicates
+        GameSettings.getInstance().markFlagAsUsed(currentFlag.getCountryCode());
         
         // Load the flag image
         try {
@@ -153,8 +172,8 @@ public class FlagGameController {
             return;
         }
         
-        // Increment total questions
-        totalQuestions++;
+        // Increment total questions in GameSettings
+        GameSettings.getInstance().incrementTotalQuestions();
         
         // Get the selected country name
         String selectedCountry = selectedOption.getText();
@@ -165,34 +184,49 @@ public class FlagGameController {
         
         // Update score if correct
         if (selectedCountry.equals(currentFlag.getCountryName())) {
-            correctAnswers++;
-            feedbackLabel.getStyleClass().clear();
+            GameSettings.getInstance().incrementCorrectAnswers();
             feedbackLabel.getStyleClass().add("feedback-correct");
         } else {
-            feedbackLabel.getStyleClass().clear();
             feedbackLabel.getStyleClass().add("feedback-incorrect");
         }
         
         // Update score label
-        if (totalQuestions > 0) {
-            int percentage = (int)((double)correctAnswers/totalQuestions*100);
-            scoreLabel.setText("Score: " + correctAnswers + "/" + totalQuestions + " (" + percentage + "%)");
-        } else {
-            scoreLabel.setText("Score: 0/0 (0%)");
+        updateScoreLabel();
+        
+        // Disable submit button
+        submitButton.setDisable(true);
+        
+        // Check if game is complete
+        if (GameSettings.getInstance().isGameComplete()) {
+            // If game is complete, change Next button text and behavior
+            nextButton.setText("See Results");
         }
         
-        // Disable submit button, enable next button
-        submitButton.setDisable(true);
+        // Enable next button
         nextButton.setDisable(false);
     }
 
     @FXML
     private void handleNext() {
-        loadNewFlag();
+        // Check if the game is complete
+        if (GameSettings.getInstance().isGameComplete()) {
+            // Navigate to the summary screen
+            ViewSwitcher viewSwitcher = new ViewSwitcher((Stage) nextButton.getScene().getWindow());
+            viewSwitcher.switchToView("/game-summary-view.fxml");
+        } else {
+            // Load the next flag
+            loadNewFlag();
+        }
     }
 
     @FXML
     private void handleBack() {
+        // Ask for confirmation if game in progress
+        if (GameSettings.getInstance().getTotalQuestions() > 0) {
+            // Reset counters since we're abandoning this game
+            GameSettings.getInstance().resetGameCounters();
+        }
+        
         ViewSwitcher viewSwitcher = new ViewSwitcher((Stage) backButton.getScene().getWindow());
         viewSwitcher.switchToView("/game-setup-view.fxml");
     }

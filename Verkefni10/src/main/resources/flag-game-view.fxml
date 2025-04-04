@@ -41,8 +41,7 @@
         <RadioButton fx:id="option2" text="Option 2" toggleGroup="$answerGroup" />
         <RadioButton fx:id="option3" text="Option 3" toggleGroup="$answerGroup" />
         <RadioButton fx:id="option4" text="Option 4" toggleGroup="$answerGroup" />
-        <RadioButton fx:id="option5" text="Option 5" toggleGroup="$answerGroup" visible="false" />
-        <RadioButton fx:id="option6" text="Option 6" toggleGroup="$answerGroup" visible="false" />
+        <RadioButton fx:id="option5" text="Option 5" toggleGroup="$answerGroup" />
     </VBox>
     
     <Label fx:id="feedbackLabel" styleClass="feedback" text="" />

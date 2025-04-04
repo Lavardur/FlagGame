@@ -240,3 +240,25 @@ h1, h2, h3 {
     -fx-background-radius: 20;
     -fx-padding: 5 15;
 }
+
+/* Add these styles to your existing CSS file */
+
+.score-total {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1a5fb4;
+}
+
+.score-progress {
+    -fx-accent: #2e7d32; /* Green for the filled part */
+}
+
+.score-progress > .bar {
+    -fx-background-insets: 1 1 1 1;
+    -fx-padding: 0.20em;
+}
+
+.score-progress > .track {
+    -fx-background-color: #f5f5f5;
+    -fx-background-insets: 0, 1;
+}

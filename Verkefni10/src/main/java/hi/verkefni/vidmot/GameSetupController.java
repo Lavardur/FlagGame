@@ -51,7 +51,10 @@ public class GameSetupController {
         
         // Update labels when selections change
         continentComboBox.setOnAction(event -> updateFlagCount());
-        difficultyComboBox.setOnAction(event -> updateDifficultyDescription());
+        difficultyComboBox.setOnAction(event -> {
+            updateFlagCount();
+            updateDifficultyDescription();
+        });
         
         // Initialize labels
         updateFlagCount();
@@ -60,14 +63,27 @@ public class GameSetupController {
     
     private void updateFlagCount() {
         String selectedContinent = continentComboBox.getValue();
+        String difficulty = difficultyComboBox.getValue();
+        boolean isEasyMode = "Easy".equals(difficulty);
+        
         int flagCount;
         
         if ("All Continents".equals(selectedContinent)) {
-            flagCount = flagService.getTotalFlagCount();
-            flagCountLabel.setText("Available flags: " + flagCount);
+            if (isEasyMode) {
+                flagCount = flagService.getTopFlagsCount();
+                flagCountLabel.setText("Top recognizable flags: " + flagCount);
+            } else {
+                flagCount = flagService.getTotalFlagCount();
+                flagCountLabel.setText("Available flags: " + flagCount);
+            }
         } else {
-            flagCount = flagService.getFlagCountByContinent(selectedContinent);
-            flagCountLabel.setText(selectedContinent + " flags: " + flagCount);
+            if (isEasyMode) {
+                flagCount = flagService.getTopFlagCountByContinent(selectedContinent);
+                flagCountLabel.setText("Top " + selectedContinent + " flags: " + flagCount);
+            } else {
+                flagCount = flagService.getFlagCountByContinent(selectedContinent);
+                flagCountLabel.setText(selectedContinent + " flags: " + flagCount);
+            }
         }
     }
     
@@ -75,14 +91,14 @@ public class GameSetupController {
         String difficulty = difficultyComboBox.getValue();
         switch (difficulty) {
             case "Easy":
-                difficultyDescriptionLabel.setText("Description: 3 options (more relaxed)");
+                difficultyDescriptionLabel.setText("Most recognizable flags with 3 options");
                 break;
             case "Hard":
-                difficultyDescriptionLabel.setText("Description: 6 options (more challenging)");
+                difficultyDescriptionLabel.setText("All flags with 5 options (challenging)");
                 break;
             case "Medium":
             default:
-                difficultyDescriptionLabel.setText("Description: Standard 4-option quiz");
+                difficultyDescriptionLabel.setText("All flags with 4 options (standard)");
                 break;
         }
     }
@@ -98,6 +114,9 @@ public class GameSetupController {
         // Store the selected options in GameSettings
         GameSettings.getInstance().setContinent(continentComboBox.getValue());
         GameSettings.getInstance().setDifficulty(difficultyComboBox.getValue());
+        
+        // Reset game counters in case there was a previous game
+        GameSettings.getInstance().resetGameCounters();
         
         // Switch to the game view
         ViewSwitcher viewSwitcher = new ViewSwitcher((Stage) startButton.getScene().getWindow());
