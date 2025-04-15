@@ -98,6 +98,15 @@ public class FlagService {
                 .collect(Collectors.toList());
     }
     
+    /**
+     * Generates a list of country name options for a given flag, including the correct answer
+     * and additional options from the same continent or other continents if necessary.
+     *
+     * @param currentFlag      The flag for which the country options are being generated.
+     * @param numberOfOptions  The total number of country options to generate.
+     * @return A list of country names, including the correct answer and other randomized options.
+     *         The list is shuffled to randomize the order of the options.
+     */
     public List<String> getCountryOptionsForFlag(Flag currentFlag, int numberOfOptions) {
         List<String> options = new ArrayList<>();
         options.add(currentFlag.getCountryName()); // Add correct answer

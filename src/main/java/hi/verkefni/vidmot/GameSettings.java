@@ -54,7 +54,7 @@ public class GameSettings {
             case "Easy":
                 return 3;
             case "Hard":
-                return 5; // Changed from 6 to 5
+                return 5;
             case "Medium":
             default:
                 return 4;
