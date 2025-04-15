@@ -1,3 +1,11 @@
+/******************************************************************************
+ *  Höfundur: Anton Benediktsson
+ *  Netfang : anb59@hi.is
+ *  Lýsing  : Þetta er Controller klasi fyrir Velkominn gluggann í forritinu.
+ *            Hann sér um að meðhöndla viðburði frá notanda og upphafsstilla
+ *            viðmótið með því að birta handahófskennt fána í myndasvæðinu.
+ *****************************************************************************/
+
 package hi.verkefni.vidmot;
 
 import javafx.fxml.FXML;

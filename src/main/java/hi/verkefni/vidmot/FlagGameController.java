@@ -1,3 +1,15 @@
+/******************************************************************************
+ *  Nafn    : Anton Benediktsson
+ *  T-póstur: anb59@hi.is
+ *  Lýsing  : Þessi klasi þjónar sem stjórnandi fyrir Flag Game forritið.
+ *            Hann sér um notendaviðmótsrökfræði, þar á meðal að hlaða inn fánum,
+ *            stjórna samskiptum við notendur og uppfæra stöðu leiksins byggt á
+ *            inntaki notenda. Stjórnandinn vinnur með FlagService til að sækja
+ *            gögn um fána og FeedbackService til að meta ágiskanir notenda.
+ *            Hann uppfærir einnig leikstillingar og sér um að skipta á milli
+ *            skjámynda eftir þörfum.
+ *****************************************************************************/
+
 package hi.verkefni.vidmot;
 
 import hi.verkefni.vinnsla.FeedbackService;

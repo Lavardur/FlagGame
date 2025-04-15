@@ -1,3 +1,12 @@
+/******************************************************************************
+ *  Höfundur: Anton Benediktsson
+ *  Netfang : anb59@hi.is
+ *  Lýsing  : Klasi sem geymir stillingar fyrir leikinn, þar á meðal heimsálfu, 
+ *            erfiðleikastig, fjölda réttra svara, heildarfjölda spurninga og 
+ *            fjölda spurninga í hverri umferð. Einnig heldur hann utan um 
+ *            notaða fána til að koma í veg fyrir endurtekningar.
+ *****************************************************************************/
+
 package hi.verkefni.vidmot;
 
 import java.util.HashSet;

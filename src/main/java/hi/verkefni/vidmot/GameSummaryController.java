@@ -1,3 +1,10 @@
+/******************************************************************************
+ *  Höfundur: Anton Benediktsson
+ *  Netfang : anb59@hi.is
+ *  Lýsing  : Controller klasi fyrir yfirlit leikjaeinkunnar. Sér um að uppfæra viðmót
+ *            með upplýsingum um rétt svör, framvindu, einstaka fána og endurgjöf.
+ *****************************************************************************/
+
 package hi.verkefni.vidmot;
 
 import javafx.fxml.FXML;

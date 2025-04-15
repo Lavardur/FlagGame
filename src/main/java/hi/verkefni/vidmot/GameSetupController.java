@@ -1,3 +1,11 @@
+/******************************************************************************
+ *  Nafn    : Anton Benediktsson
+ *  T-póstur: anb59@hi.is
+ *  Lýsing  : Þessi klasi sér um uppsetningu leiksins þar sem notandi getur valið heimsálfu,
+ *            erfiðleikastig og fengið upplýsingar um fjölda fána sem eru í boði.
+ *            Einnig er hægt að fara til baka eða hefja leikinn með valmöguleikum notanda.
+ *****************************************************************************/
+
 package hi.verkefni.vidmot;
 
 import hi.verkefni.vinnsla.FlagService;

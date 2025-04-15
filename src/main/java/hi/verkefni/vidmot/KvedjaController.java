@@ -1,3 +1,11 @@
+/******************************************************************************
+ *  Höfundur: Anton Benediktsson
+ *  Netfang : anb59@hi.is
+ *  Lýsing  : Controller klasi fyrir kveðjuskjáinn í FlagGame forritinu. 
+ *            Sér um að birta handahófskennt fána og loka glugganum þegar 
+ *            notandi ýtir á loka hnappinn.
+ *****************************************************************************/
+
 package hi.verkefni.vidmot;
 
 import javafx.fxml.FXML;

@@ -1,3 +1,10 @@
+/******************************************************************************
+ *  Höfundur: Anton Benediktsson
+ *  Netfang : anb59@hi.is
+ *  Lýsing  : Klasi sem heldur utan um upplýsingar um fána, þar á meðal landakóða, 
+ *            nafn lands, slóð á mynd af fána og heimsálfu.
+ *****************************************************************************/
+
 package hi.verkefni.vinnsla;
 
 public class Flag {

@@ -1,3 +1,11 @@
+/******************************************************************************
+ *  Nafn    : Anton Benediktsson
+ *  T-póstur: anb59@hi.is
+ *  Lýsing  : Þessi klasi veitir aðgang að lista yfir þekktustu fánana eftir heimsálfum.
+ *            Hann inniheldur aðferðir til að sækja fánalista fyrir tiltekna heimsálfu
+ *            og til að athuga hvort tiltekinn fáni sé meðal þekktustu fánanna.
+ *****************************************************************************/
+
 package hi.verkefni.vinnsla;
 
 import java.util.Arrays;

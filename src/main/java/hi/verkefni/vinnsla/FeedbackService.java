@@ -1,3 +1,11 @@
+/******************************************************************************
+ *  Höfundur: Anton Benediktsson
+ *  Netfang : anb59@hi.is
+ *  Lýsing  : Þjónustuklasi sem metur hvort notandi hafi giskað rétt á land
+ *            og skilar viðeigandi endurgjöf byggt á niðurstöðunni.
+ *
+ *****************************************************************************/
+
 package hi.verkefni.vinnsla;
 
 public class FeedbackService {

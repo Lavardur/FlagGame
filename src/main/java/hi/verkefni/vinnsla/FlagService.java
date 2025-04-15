@@ -1,3 +1,12 @@
+/******************************************************************************
+ *  Nafn    : Anton Benediktsson
+ *  T-póstur: anb59@hi.is
+ *  Lýsing  : Þjónustuklasi sem sér um að hlaða inn gögnum um fána, flokka þá eftir heimsálfum
+ *            og veita aðgang að þeim fyrir leikinn. Inniheldur einnig aðferðir til að velja
+ *            handahófskennda fána og búa til valmöguleika fyrir notendur.
+ *
+ *****************************************************************************/
+
 package hi.verkefni.vinnsla;
 
 import hi.verkefni.vidmot.GameSettings;

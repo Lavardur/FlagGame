@@ -1,3 +1,10 @@
+/******************************************************************************
+ *  Nafn    : Anton Benediktsson
+ *  T-póstur: anb59@hi.is
+ *  Lýsing  : Klasi sem sér um að skipta á milli mismunandi viðmóta í forritinu
+ *            með því að lesa inn notendaviðmótslýsingu úr .fxml skrám og birta þær í glugga.
+ *****************************************************************************/
+
 package hi.verkefni.vidmot;
 
 import java.io.IOException;

@@ -1,3 +1,10 @@
+/******************************************************************************
+ *  Nafn    : Anton Benediktsson
+ *  T-póstur: anb59@hi.is
+ *  Lýsing  : Klasi sem sér um að hlaða inn gögnum um lönd og heimsálfur úr JSON skrá.
+ *            Gögnin eru vistuð í kortum fyrir auðveldan aðgang og leit.
+ *****************************************************************************/
+
 package hi.verkefni.vinnsla;
 
 import java.io.BufferedReader;

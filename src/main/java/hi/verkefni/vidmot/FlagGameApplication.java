@@ -1,3 +1,11 @@
+/******************************************************************************
+ *  Nafn    : Anton Benediktsson
+ *  T-póstur: anb59@hi.is
+ *  Lýsing  : Application klasi sem les inn notendaviðmótslýsingu úr .fxml og ræsir gluggann
+ *
+ *
+ *****************************************************************************/
+
 package hi.verkefni.vidmot;
 
 import javafx.application.Application;

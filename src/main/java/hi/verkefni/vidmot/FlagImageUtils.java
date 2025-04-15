@@ -1,3 +1,10 @@
+/******************************************************************************
+ *  Nafn    : Anton Benediktsson
+ *  T-póstur: anb59@hi.is
+ *  Lýsing  : Hjálparklasi fyrir vinnslu og birtingu á fána myndum í notendaviðmóti.
+ *            Klasi sem inniheldur aðferðir til að velja handahófskennda fána og 
+ *            birta þá í ImageView hluti.
+ *****************************************************************************/
 package hi.verkefni.vidmot;
 
 import hi.verkefni.vinnsla.CountryDataLoader;
