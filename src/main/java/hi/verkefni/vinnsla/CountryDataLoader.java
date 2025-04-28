@@ -14,9 +14,8 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 public class CountryDataLoader {
     
@@ -81,7 +80,7 @@ public class CountryDataLoader {
     
     private static Map<String, String> loadCountryData() {
         Map<String, String> result = new HashMap<>();
-        JSONParser parser = new JSONParser();
+        ObjectMapper mapper = new ObjectMapper();
         
         try (InputStream in = CountryDataLoader.class.getResourceAsStream("/codes.json")) {
             if (in == null) {
@@ -89,18 +88,10 @@ public class CountryDataLoader {
                 return result;
             }
             
-            String jsonContent = new BufferedReader(new InputStreamReader(in))
-                    .lines().collect(Collectors.joining("\n"));
+            // Read JSON directly into Map
+            result = mapper.readValue(in, new TypeReference<Map<String, String>>() {});
             
-            JSONObject jsonObject = (JSONObject) parser.parse(jsonContent);
-            
-            for (Object key : jsonObject.keySet()) {
-                String code = (String) key;
-                String name = (String) jsonObject.get(key);
-                result.put(code, name);
-            }
-            
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             System.err.println("Error loading country data: " + e.getMessage());
             e.printStackTrace();
         }
