@@ -1,6 +1,7 @@
 module hi.verkefni {
     requires javafx.controls;
     requires javafx.fxml;
+    requires transitive javafx.graphics;
     requires com.fasterxml.jackson.databind;
 
     exports hi.verkefni.vidmot to javafx.graphics, javafx.fxml;
